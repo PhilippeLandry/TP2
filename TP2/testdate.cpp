@@ -7,7 +7,7 @@
 #include <sstream>
 #include <vector> // std::vecteur est permis uniquement pour ce test.
 
-int main2()
+int main()
 {
     std::cout << "Vérification de la classe Date" << std::endl;
     std::stringstream str("0j_00h00m 0j_00h01m 0j_00h02m 0j_00h40m 0j_00h59m 0j_01h00m 0j_01h01m 0j_01h02m 0j_02h00m 0j_02h01m 0j_02h03m 0j_02h10m 0j_02h12m 1j_00h00m 1j_01h01m 2j_00h00m");

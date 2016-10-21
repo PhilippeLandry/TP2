@@ -12,7 +12,6 @@
 		9C593AEF1DB97EAC00BEEA07 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 9C593AE41DB97EAB00BEEA07 /* Makefile */; };
 		9C593AF01DB97EAC00BEEA07 /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C593AE61DB97EAB00BEEA07 /* point.cpp */; };
 		9C593AF11DB97EAC00BEEA07 /* succ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C593AE81DB97EAB00BEEA07 /* succ.cpp */; };
-		9C593AF21DB97EAC00BEEA07 /* testdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C593AEC1DB97EAB00BEEA07 /* testdate.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -155,7 +154,6 @@
 				9C593ADA1DB97E8400BEEA07 /* tp2.cpp in Sources */,
 				9C593AF11DB97EAC00BEEA07 /* succ.cpp in Sources */,
 				9C593AEE1DB97EAC00BEEA07 /* date.cpp in Sources */,
-				9C593AF21DB97EAC00BEEA07 /* testdate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +280,7 @@
 				9C593ADF1DB97E8400BEEA07 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
