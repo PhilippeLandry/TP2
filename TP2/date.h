@@ -14,9 +14,13 @@ class Date{
     
     bool operator <(const Date& date) const;
     bool operator <=(const Date& date) const;
-  
+    
+    int jours() const;
+    int heures() const;
+    int minutes() const;
   private:
-    time_t time; // Le temps en secondes
+    
+    time_t time;
     
   friend std::ostream& operator << (std::ostream&, const Date& date);
   friend std::istream& operator >> (std::istream&, Date& date);

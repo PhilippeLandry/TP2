@@ -7,45 +7,63 @@
 #include <cstdio>
 #include <iomanip>
 #include <assert.h>
+using namespace std;
+
+#define SECONDES_PAR_MINUTE 60
+#define SECONDES_PAR_HEURE 3600
+#define SECONDES_PAR_JOUR 86400
+#define MINUTES_PAR_HEURE 60
 
 Date::Date()
 {
-  // À compléter
+
 }
 
-bool Date::operator <(const Date& d) const{
-    // À compléter : comparer *this (l'objet courant) < d.
-    return false;
+bool
+Date::operator <(const Date& d) const{
+    
+    return time < d.time;
 }
 
-bool Date::operator <=(const Date& d) const{
-    // À compléter : comparer *this (l'objet courant) <= d.
-    return false;
+bool
+Date::operator <=(const Date& d) const{
+    return time <= d.time;
+}
+
+int
+Date::jours() const {
+        return (int) time / SECONDES_PAR_JOUR;
+}
+
+int
+Date::heures() const {
+    return (int)  (time / SECONDES_PAR_HEURE) % 24;
+}
+
+int
+Date::minutes() const {
+    return (int)(time / SECONDES_PAR_MINUTE) % SECONDES_PAR_MINUTE;
 }
 
 std::ostream& operator << (std::ostream& os, const Date& d){
-    int jours, heures, minutes;
-    // À compléter
-    // jours = ...
-    // heures = ...
-    // minutes = ...
+    
+
     char chaine[40];
-    sprintf(chaine, "%dj_%02dh%02dm", jours, heures, minutes);
+    sprintf(chaine, "%dj_%02dh%02dm", d.jours(), d.heures(), d.minutes());
     os << chaine;
     return os;
 }
 
 std::istream& operator >> (std::istream& is, Date& d){
-    char chaine[40];
-    int jours, heures, minutes;
+    
     char j, m, h, underscore;
+    int jours , minutes, heures;
     is >> jours >> j >> underscore >> heures >> h >> minutes >> m;
     assert(j=='j');
     assert(underscore=='_');
     assert(h=='h' && m=='m');
 
-    // À compléter : utiliser les variable jours,heures,minutes pour modifier l'objet d.
-
+    d.time = jours * SECONDES_PAR_JOUR + heures * SECONDES_PAR_HEURE + minutes * SECONDES_PAR_MINUTE;
 
     return is;
 }
