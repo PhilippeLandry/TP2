@@ -9,9 +9,10 @@
 #include "succ.h"
 #include "point.h"
 using namespace std;
-
+#include "testdate.cpp"
 int tp2(istream& entree){
     // À compléter...
+    return testdate();
     
     int id=1;
     while(entree){

@@ -27,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9C4936AA1DCC13590051F4C9 /* tableau.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tableau.h; sourceTree = "<group>"; };
 		9C593AD61DB97E8400BEEA07 /* TP2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TP2; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C593AD91DB97E8400BEEA07 /* tp2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tp2.cpp; sourceTree = "<group>"; };
 		9C593AE01DB97EAB00BEEA07 /* arbreavl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arbreavl.h; sourceTree = "<group>"; };
@@ -74,6 +75,7 @@
 		9C593AD81DB97E8400BEEA07 /* TP2 */ = {
 			isa = PBXGroup;
 			children = (
+				9C4936AA1DCC13590051F4C9 /* tableau.h */,
 				9C593AD91DB97E8400BEEA07 /* tp2.cpp */,
 				9C593AE01DB97EAB00BEEA07 /* arbreavl.h */,
 				9C593AE11DB97EAB00BEEA07 /* arbremap.h */,

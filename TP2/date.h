@@ -16,7 +16,7 @@ class Date{
     bool operator <=(const Date& date) const;
   
   private:
-    
+    time_t time; // Le temps en secondes
     
   friend std::ostream& operator << (std::ostream&, const Date& date);
   friend std::istream& operator >> (std::istream&, Date& date);
