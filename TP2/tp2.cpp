@@ -97,7 +97,7 @@ int tp2(istream& entree){
                 continue;
             }
             
-            cout << depart << " " << debut << " " << arrivee << " " << fin << endl;
+            cout << depart << " " <<  arrivee  << endl;
             
         }else{
             cout << "Commande '" << commande << "' invalide!" << endl;

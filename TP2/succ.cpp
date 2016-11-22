@@ -47,7 +47,7 @@ Succursale::accepteEntree( const Date& date )  {
     if( !(itr.cle() == date) ){
         ++itr;
     }
-     
+    
     while (itr != planning.fin()) {
         if( itr.cle() < date ){ ++ itr;
             continue;
