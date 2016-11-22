@@ -9,6 +9,7 @@
 #include "date.h"
 #include "point.h"
 #include <map>
+#include "arbremap.h"
 using namespace std;
 
 class Succursale{
@@ -27,7 +28,7 @@ class Succursale{
     
     
     int nbPlaces; // nbvoitures + nbplaceslibres
-    std::map<Date, int> planning;
+    ArbreMap<Date, int> planning;
     
     void entrer( const Date& date );
     void sortir( const Date& date );

@@ -19,16 +19,18 @@ Succursale::Succursale( string nom, Point position, int nbvoitures, int nbplaces
 bool
 Succursale::accepteSortie( const Date& date ) {
     
-    std::map<Date, int>::iterator itr = planning.lower_bound(date);
-    if( itr == planning.end()){
-        if( planning.begin()->second - 1 < 0 ){
-            return false;
-        }
+    if( nom == "I"){
+        trace();
     }
-    while (itr != planning.end()) {
-        
-        int valeur = itr->second;
-        if( valeur - 1 < 0 ){
+
+    ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
+    int valeur = itr.valeur();
+    if( valeur - 1 < 0 ){
+        return false;
+    }
+    while (itr != planning.fin()) {
+        if( itr.cle() <= date ){ ++itr; continue; }
+        if( itr.valeur() - 1 < 0 ){
             return false;
         }
         ++itr;
@@ -38,28 +40,28 @@ Succursale::accepteSortie( const Date& date ) {
 
 void
 Succursale::trace() {
+    return;
     cout << "====================" << endl;
     cout << "Succ: " << nom << endl;
-    map<Date,int>::iterator itr = planning.begin();
-    for( ; itr != planning.end(); itr++){
-        cout << "   " << itr->first << " " << itr->second <<  "/" << nbPlaces <<endl;
+    ArbreMap<Date, int>::Iterateur itr = planning.debut();
+    for( ; itr != planning.fin(); ++itr){
+        cout << "   " << itr.cle() << " " << itr.valeur() <<  "/" << nbPlaces <<endl;
     }
 }
 bool
 Succursale::accepteEntree( const Date& date )  {
-    if( nom == "C"){
-        
+    if( nom == "I"){
+        trace();
     }
 
-    std::map<Date, int>::iterator  itr = planning.lower_bound(date);
-    if( itr == planning.end()){
-        if( planning.begin()->second + 1 > nbPlaces ){
-            return false;
-        }
+    ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
+    int valeur = itr.valeur();
+    if( valeur + 1 > nbPlaces ){
+        return false;
     }
-
-    while (itr != planning.end()) {
-        int valeur = itr->second;
+    while (itr != planning.fin()) {
+        if( itr.cle() <= date ){ ++itr; continue; }
+        int valeur = itr.valeur();
         if( valeur + 1 > nbPlaces){
             return false;
         }
@@ -71,29 +73,52 @@ Succursale::accepteEntree( const Date& date )  {
 void
 Succursale::entrer( const Date& date ){
     
+    if( nom == "I"){
+        trace();
+    }
+    
+    ArbreMap<Date, int>::Iterateur  itr = planning.rechercherEgalOuPrecedent(date);
+    
+    planning[date] = itr.valeur() + 1;
 
-    std::map<Date, int>::iterator  itr = planning.lower_bound(date);
-    int valeur = itr->second;
-    planning[date] = valeur + 1;
-     while (itr != planning.end()) {
-         int valeur = itr->second;
-         itr->second = valeur + 1;
+     while (itr != planning.fin()) {
+         if( itr.cle() <= date ){ ++itr; continue; }
+         
+         itr.valeur() = itr.valeur() + 1;
          ++itr;
          
      }
+    
+    if( nom == "I"){
+        trace();
+    }
     
     
 }
 
 void
 Succursale::sortir( const Date& date ){
-    std::map<Date, int>::iterator  itr = planning.lower_bound(date);
-    int valeur = itr->second;
-    planning[date] = valeur - 1;
-    while (itr != planning.end()) {
-        int valeur = itr->second;
-        itr->second = valeur - 1;
+    if( nom == "I"){
+        trace();
+    }
+
+    ArbreMap<Date, int>::Iterateur  itr = planning.rechercherEgalOuPrecedent(date);
+    
+    
+    
+    
+    planning[date] = itr.valeur() - 1;
+
+    
+    
+    while (itr != planning.fin()) {
+        if( itr.cle() <= date ){ ++itr; continue; }
+        
+        itr.valeur() = itr.valeur() - 1;
         ++itr;
+    }
+    if( nom == "I"){
+        trace();
     }
 }
 
@@ -101,7 +126,7 @@ Succursale::sortir( const Date& date ){
 bool
 Succursale::reserver( Succursale& origine, Succursale& destination,const Date& debut, const Date& fin){
     
-    //cout << "origine:" << origine.nom << " destination:" << destination.nom << " debut: " << debut << " fin:" << fin << endl;
+  // cout << "origine:" << origine.nom << " destination:" << destination.nom << " debut: " << debut << " fin:" << fin << endl;
 
     
     
