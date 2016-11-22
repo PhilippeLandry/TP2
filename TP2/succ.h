@@ -21,7 +21,7 @@ class Succursale{
     bool accepteSortie( const Date& date );
     bool accepteEntree( const Date& date );
     
-    
+    void trace();
  
   private:
     

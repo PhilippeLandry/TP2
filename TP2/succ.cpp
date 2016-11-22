@@ -19,16 +19,14 @@ Succursale::Succursale( string nom, Point position, int nbvoitures, int nbplaces
 bool
 Succursale::accepteSortie( const Date& date ) {
     
-    if( nom == "C"){
-        
-    }
     std::map<Date, int>::iterator itr = planning.lower_bound(date);
-    if( !(itr->first == date) ){
-  //      itr++;
+    if( itr == planning.end()){
+        if( planning.begin()->second - 1 < 0 ){
+            return false;
+        }
     }
-
     while (itr != planning.end()) {
-        if( itr->first < date ){ ++ itr; continue; }
+        
         int valeur = itr->second;
         if( valeur - 1 < 0 ){
             return false;
@@ -37,6 +35,16 @@ Succursale::accepteSortie( const Date& date ) {
     }
     return true;
 }
+
+void
+Succursale::trace() {
+    cout << "====================" << endl;
+    cout << "Succ: " << nom << endl;
+    map<Date,int>::iterator itr = planning.begin();
+    for( ; itr != planning.end(); itr++){
+        cout << "   " << itr->first << " " << itr->second <<  "/" << nbPlaces <<endl;
+    }
+}
 bool
 Succursale::accepteEntree( const Date& date )  {
     if( nom == "C"){
@@ -44,7 +52,12 @@ Succursale::accepteEntree( const Date& date )  {
     }
 
     std::map<Date, int>::iterator  itr = planning.lower_bound(date);
-    
+    if( itr == planning.end()){
+        if( planning.begin()->second + 1 > nbPlaces ){
+            return false;
+        }
+    }
+
     while (itr != planning.end()) {
         int valeur = itr->second;
         if( valeur + 1 > nbPlaces){
@@ -63,8 +76,8 @@ Succursale::entrer( const Date& date ){
     int valeur = itr->second;
     planning[date] = valeur + 1;
      while (itr != planning.end()) {
-         if( itr->first < date ){ ++ itr; continue; }
-         itr->second = itr->second + 1;
+         int valeur = itr->second;
+         itr->second = valeur + 1;
          ++itr;
          
      }
@@ -78,8 +91,8 @@ Succursale::sortir( const Date& date ){
     int valeur = itr->second;
     planning[date] = valeur - 1;
     while (itr != planning.end()) {
-        if( itr->first < date ){ ++ itr; continue; }
-        itr->second--;
+        int valeur = itr->second;
+        itr->second = valeur - 1;
         ++itr;
     }
 }
@@ -92,7 +105,10 @@ Succursale::reserver( Succursale& origine, Succursale& destination,const Date& d
 
     
     
-    bool resultat =  origine.accepteSortie( Date(debut)) && destination.accepteEntree(fin);
+    bool resultat =  origine.accepteSortie( Date(debut));
+    if( resultat && origine.nom != destination.nom ){
+            resultat &= destination.accepteEntree(fin);
+    }
     if( resultat ){
         origine.sortir(debut);
         destination.entrer(fin);

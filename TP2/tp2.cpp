@@ -43,15 +43,26 @@ int tp2(istream& entree){
             string origine, destination;
             Date debut, fin;
             entree >> origine >> debut >> destination >> fin;
+            
+            if( id == -32 ){
+                succursales[origine].trace();
+                succursales[destination].trace();
+            }
+            
             bool ok = Succursale::reserver(succursales[origine], succursales[destination], debut, fin);
             cout << (ok ? "Acceptee" : "NonDispo") << endl;
+            
+            if( id == -32 ){
+                succursales[origine].trace();
+                succursales[destination].trace();
+            }
+
 
         
         }else if(commande=="suggerer"){
             Point origine, destination;
             Date debut, fin;
             entree >> origine >> debut >> destination >> fin;
-            
             
             
             
