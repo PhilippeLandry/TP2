@@ -1,3 +1,4 @@
+
 /*  INF3105 - Structures de données et algorithmes
  UQAM | Faculté des sciences | Département d'informatique
  Automne 2016 | TP2
@@ -54,8 +55,6 @@ int tp2(istream& entree){
             
             
             
-            double distSource = __DBL_MAX__;
-            double distDest = __DBL_MAX__;
             
             // CLASSER LES SUCCURSALES PAR DISTANCE
             ArbreMap<double, Succursale> distancesOrigine;

@@ -19,9 +19,17 @@ Succursale::Succursale( string nom, Point position, int nbvoitures, int nbplaces
 bool
 Succursale::accepteSortie( const Date& date ) {
     
+    if( nom == "C"){
+        
+    }
     ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
+    if( !(itr.cle() == date) ){
+        ++itr;
+    }
+
     while (itr != planning.fin()) {
-        if( itr.valeur() - 1 < 0 ){
+        int valeur = itr.valeur();
+        if( valeur - 1 < 0 ){
             return false;
         }
         ++itr;
@@ -30,9 +38,19 @@ Succursale::accepteSortie( const Date& date ) {
 }
 bool
 Succursale::accepteEntree( const Date& date )  {
+    if( nom == "C"){
+        
+    }
+
     ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
+    if( !(itr.cle() == date) ){
+        ++itr;
+    }
+
     while (itr != planning.fin()) {
-        if( itr.valeur() + 1 > nbPlaces){
+        if( itr.cle() < date ){ ++ itr; continue; } 
+        int valeur = itr.valeur();
+        if( valeur + 1 > nbPlaces){
             return false;
         }
         ++itr;
@@ -42,15 +60,28 @@ Succursale::accepteEntree( const Date& date )  {
 
 void
 Succursale::entrer( const Date& date ){
+    
+    if( nom == "C"){
+        ArbreMap<Date, int>::Iterateur itr = planning.debut();
+        while( itr != planning.fin() ){
+            ++itr;
+        }
+        
+    }
+
     ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
     if( !(itr.cle() == date) ){
-        planning[date] = itr.valeur();
+        planning[date] = itr.valeur() + 1;
         ++itr;
     }
      while (itr != planning.fin()) {
+         if( itr.cle() < date ){ ++ itr; continue; }
          itr.valeur()++;
          ++itr;
+         
      }
+    
+    
 }
 
 void
@@ -69,12 +100,18 @@ Succursale::sortir( const Date& date ){
 
 bool
 Succursale::reserver( Succursale& origine, Succursale& destination,const Date& debut, const Date& fin){
+    
     //cout << "origine:" << origine.nom << " destination:" << destination.nom << " debut: " << debut << " fin:" << fin << endl;
+
+    
+    
     bool resultat =  origine.accepteSortie( Date(debut)) && destination.accepteEntree(fin);
     if( resultat ){
         origine.sortir(debut);
         destination.entrer(fin);
     }
+    
+
     
     return resultat;
 }
