@@ -19,8 +19,8 @@ class Succursale{
     string nom;
     static bool reserver( Succursale& origine, Succursale& destination, const Date& debut, const Date& fin );
     Point position;
-    bool accepteSortie( const Date& date );
-    bool accepteEntree( const Date& date );
+    bool accepteSortie( const Date& date , const Date& retour = Date() );
+    bool accepteEntree( const Date& date , const Date& retour = Date() );
     
     void trace();
  

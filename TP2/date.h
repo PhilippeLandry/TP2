@@ -19,9 +19,10 @@ class Date{
     int jours() const;
     int heures() const;
     int minutes() const;
+    time_t time;
   private:
     
-    time_t time;
+    
     
   friend std::ostream& operator << (std::ostream&, const Date& date);
   friend std::istream& operator >> (std::istream&, Date& date);
