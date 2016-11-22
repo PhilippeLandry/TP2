@@ -44,14 +44,8 @@ Succursale::accepteEntree( const Date& date )  {
     }
 
     std::map<Date, int>::iterator  itr = planning.lower_bound(date);
-    if( !(itr->first == date) ){
- //       ++itr;
-    }
     
     while (itr != planning.end()) {
-        if( itr->first < date ){ ++ itr;
-            continue;
-        }
         int valeur = itr->second;
         if( valeur + 1 > nbPlaces){
             return false;
@@ -66,13 +60,11 @@ Succursale::entrer( const Date& date ){
     
 
     std::map<Date, int>::iterator  itr = planning.lower_bound(date);
-    if( !(itr->first == date) ){
-        planning[date] = itr->second + 1;
-    //    ++itr;
-    }
+    int valeur = itr->second;
+    planning[date] = valeur + 1;
      while (itr != planning.end()) {
          if( itr->first < date ){ ++ itr; continue; }
-         itr->second++;
+         itr->second = itr->second + 1;
          ++itr;
          
      }
@@ -83,10 +75,8 @@ Succursale::entrer( const Date& date ){
 void
 Succursale::sortir( const Date& date ){
     std::map<Date, int>::iterator  itr = planning.lower_bound(date);
-    if( !(itr->first == date) ){
-        planning[date] = itr->second;
-        //itr++;
-    }
+    int valeur = itr->second;
+    planning[date] = valeur - 1;
     while (itr != planning.end()) {
         if( itr->first < date ){ ++ itr; continue; }
         itr->second--;
