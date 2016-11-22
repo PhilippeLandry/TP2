@@ -9,16 +9,34 @@
 #include "arbreavl.h"
 #include "arbremap.h"
 #include "date.h"
-
+#include "point.h"
 using namespace std;
 
 class Succursale{
   public:
-    // À compléter...
+    Succursale();
+    Succursale( string nom, Point position, int nbvoitures, int nbplaceslibres);
+    string nom;
+    static bool reserver( Succursale& origine, Succursale& destination, const Date& debut, const Date& fin );
+
+    
+    
  
   private:
-    // À compléter...
+    
+    Point position;
+    int nbPlaces; // nbvoitures + nbplaceslibres
+    ArbreMap<Date, int> planning;
+    
+    bool accepteSortie( const Date& date );
+    bool accepteEntree( const Date& date );
+    void entrer( const Date& date );
+    void sortir( const Date& date );
+    
+
 };
+
+
 
 #endif
 

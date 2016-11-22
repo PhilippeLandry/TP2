@@ -14,9 +14,14 @@ using namespace std;
 #define SECONDES_PAR_JOUR 86400
 #define MINUTES_PAR_HEURE 60
 
-Date::Date()
+Date::Date() : time(0)
 {
 
+}
+
+Date::Date( const Date& date)
+{
+    this->time = date.time;
 }
 
 bool
@@ -28,6 +33,11 @@ Date::operator <(const Date& d) const{
 bool
 Date::operator <=(const Date& d) const{
     return time <= d.time;
+}
+
+bool
+Date::operator ==(const Date& d) const{
+    return time == d.time;
 }
 
 int

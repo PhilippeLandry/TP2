@@ -11,9 +11,10 @@
 class Date{
   public:
     Date();
-    
+    Date( const Date& );
     bool operator <(const Date& date) const;
     bool operator <=(const Date& date) const;
+    bool operator ==(const Date& date) const;
     
     int jours() const;
     int heures() const;

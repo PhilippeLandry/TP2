@@ -6,12 +6,24 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <limits>
 #include "succ.h"
 #include "point.h"
+#include "arbremap.h"
+#include "date.h"
+#include "tableau.h"
+
 using namespace std;
 #include "testdate.cpp"
+
+
+
+
 int tp2(istream& entree){
-    return testdate();
+    
+    
+    ArbreMap<string, Succursale> succursales;
+    
     int id=1;
     while(entree){
         std::string commande;
@@ -24,24 +36,23 @@ int tp2(istream& entree){
             Point p;
             int nbVoitures=0, nbPlacesLibres=0;
             entree >> nom >> p >> nbVoitures >> nbPlacesLibres;
-            // À compléter...
-            
-            
+            succursales[nom]  = Succursale(nom, p, nbVoitures, nbPlacesLibres);
             cout << "Creee"  << endl;
         }else if(commande=="reserver"){
             string origine, destination;
             Date debut, fin;
             entree >> origine >> debut >> destination >> fin;
-            bool ok = false;
-            // À compléter...
-            
-            
+            bool ok = Succursale::reserver(succursales[origine], succursales[destination], debut, fin);
             cout << (ok ? "Acceptee" : "NonDispo") << endl;
+
+        
         }else if(commande=="suggerer"){
             Point origine, destination;
             Date debut, fin;
             entree >> origine >> debut >> destination >> fin;
             bool ok = false;
+            
+            
             // À compléter...
             
             // cout << "A heure1 B heure2" << endl;

@@ -38,12 +38,13 @@ public:
         
         const K& cle() const {return (*iter).cle;}
         
-        const V& valeur() {return (V&) (*iter).valeur;}
+        V& valeur() {return (V&) (*iter).valeur;}
         
         
     private:
         typename ArbreAVL<Entree>::Iterateur iter;
     };
+    
     Iterateur debut() { return Iterateur(*this); }
     Iterateur fin() { return Iterateur(entrees.fin());}
     Iterateur rechercher(const K& cle) {

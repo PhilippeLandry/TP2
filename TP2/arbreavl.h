@@ -68,7 +68,7 @@ private:
     int hauteur(Noeud*) const;
     
 public:
-    // Sera présenté à la semaine #7
+
     class Iterateur{
     public:
         Iterateur(const ArbreAVL& a);
