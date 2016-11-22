@@ -28,6 +28,7 @@ Succursale::accepteSortie( const Date& date ) {
     }
 
     while (itr != planning.fin()) {
+        if( itr.cle() < date ){ ++ itr; continue; }
         int valeur = itr.valeur();
         if( valeur - 1 < 0 ){
             return false;
@@ -46,9 +47,11 @@ Succursale::accepteEntree( const Date& date )  {
     if( !(itr.cle() == date) ){
         ++itr;
     }
-
+    
     while (itr != planning.fin()) {
-        if( itr.cle() < date ){ ++ itr; continue; } 
+        if( itr.cle() < date ){ ++ itr;
+            continue;
+        }
         int valeur = itr.valeur();
         if( valeur + 1 > nbPlaces){
             return false;
@@ -92,6 +95,7 @@ Succursale::sortir( const Date& date ){
         ++itr;
     }
     while (itr != planning.fin()) {
+        if( itr.cle() < date ){ ++ itr; continue; }
         itr.valeur()--;
         ++itr;
     }
