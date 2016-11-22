@@ -22,14 +22,14 @@ Succursale::accepteSortie( const Date& date ) {
     if( nom == "C"){
         
     }
-    ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
-    if( !(itr.cle() == date) ){
-        ++itr;
+    std::map<Date, int>::iterator itr = planning.lower_bound(date);
+    if( !(itr->first == date) ){
+  //      itr++;
     }
 
-    while (itr != planning.fin()) {
-        if( itr.cle() < date ){ ++ itr; continue; }
-        int valeur = itr.valeur();
+    while (itr != planning.end()) {
+        if( itr->first < date ){ ++ itr; continue; }
+        int valeur = itr->second;
         if( valeur - 1 < 0 ){
             return false;
         }
@@ -43,16 +43,16 @@ Succursale::accepteEntree( const Date& date )  {
         
     }
 
-    ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
-    if( !(itr.cle() == date) ){
-        ++itr;
+    std::map<Date, int>::iterator  itr = planning.lower_bound(date);
+    if( !(itr->first == date) ){
+ //       ++itr;
     }
     
-    while (itr != planning.fin()) {
-        if( itr.cle() < date ){ ++ itr;
+    while (itr != planning.end()) {
+        if( itr->first < date ){ ++ itr;
             continue;
         }
-        int valeur = itr.valeur();
+        int valeur = itr->second;
         if( valeur + 1 > nbPlaces){
             return false;
         }
@@ -64,22 +64,15 @@ Succursale::accepteEntree( const Date& date )  {
 void
 Succursale::entrer( const Date& date ){
     
-    if( nom == "C"){
-        ArbreMap<Date, int>::Iterateur itr = planning.debut();
-        while( itr != planning.fin() ){
-            ++itr;
-        }
-        
-    }
 
-    ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
-    if( !(itr.cle() == date) ){
-        planning[date] = itr.valeur() + 1;
-        ++itr;
+    std::map<Date, int>::iterator  itr = planning.lower_bound(date);
+    if( !(itr->first == date) ){
+        planning[date] = itr->second + 1;
+    //    ++itr;
     }
-     while (itr != planning.fin()) {
-         if( itr.cle() < date ){ ++ itr; continue; }
-         itr.valeur()++;
+     while (itr != planning.end()) {
+         if( itr->first < date ){ ++ itr; continue; }
+         itr->second++;
          ++itr;
          
      }
@@ -89,14 +82,14 @@ Succursale::entrer( const Date& date ){
 
 void
 Succursale::sortir( const Date& date ){
-    ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
-    if( !(itr.cle() == date) ){
-        planning[date] = itr.valeur();
-        ++itr;
+    std::map<Date, int>::iterator  itr = planning.lower_bound(date);
+    if( !(itr->first == date) ){
+        planning[date] = itr->second;
+        //itr++;
     }
-    while (itr != planning.fin()) {
-        if( itr.cle() < date ){ ++ itr; continue; }
-        itr.valeur()--;
+    while (itr != planning.end()) {
+        if( itr->first < date ){ ++ itr; continue; }
+        itr->second--;
         ++itr;
     }
 }

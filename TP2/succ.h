@@ -6,10 +6,9 @@
 #if !defined(__SUCC_H__)
 #define __SUCC_H__
 #include <string>
-#include "arbreavl.h"
-#include "arbremap.h"
 #include "date.h"
 #include "point.h"
+#include <map>
 using namespace std;
 
 class Succursale{
@@ -28,7 +27,7 @@ class Succursale{
     
     
     int nbPlaces; // nbvoitures + nbplaceslibres
-    ArbreMap<Date, int> planning;
+    std::map<Date, int> planning;
     
     void entrer( const Date& date );
     void sortir( const Date& date );
