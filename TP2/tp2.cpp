@@ -50,13 +50,56 @@ int tp2(istream& entree){
             Point origine, destination;
             Date debut, fin;
             entree >> origine >> debut >> destination >> fin;
-            bool ok = false;
             
             
-            // À compléter...
             
-            // cout << "A heure1 B heure2" << endl;
-            cout << "Impossible" << endl;
+            
+            double distSource = __DBL_MAX__;
+            double distDest = __DBL_MAX__;
+            
+            // CLASSER LES SUCCURSALES PAR DISTANCE
+            ArbreMap<double, Succursale> distancesOrigine;
+            ArbreMap<double, Succursale> distancesDestination;
+            ArbreMap<string, Succursale>::Iterateur itr = succursales.debut();
+            while( itr != succursales.fin()){
+                double distanceOrigine = itr.valeur().position.distance(origine);
+                distancesOrigine[distanceOrigine] = itr.valeur();
+                double distanceDestination = itr.valeur().position.distance(destination);
+                distancesDestination[distanceDestination] = itr.valeur();
+                ++itr;
+            }
+            
+            // TROUVER UNE SUCCURSALE DE DÉPART
+            string depart("");
+            ArbreMap<double, Succursale>::Iterateur itr2 = distancesOrigine.debut();
+            while( itr2 != distancesOrigine.fin() ){
+                if( itr2.valeur().accepteSortie(debut)){
+                    depart = itr2.valeur().nom;
+                    break;
+                }
+                ++itr2;
+            }
+
+            // TROUVER UNE SUCCURSALE D'ARRIVER
+            string arrivee("");
+            ArbreMap<double, Succursale>::Iterateur itr3 = distancesDestination.debut();
+            while( itr3 != distancesDestination.fin() ){
+                if( itr3.valeur().accepteEntree(debut)){
+                    arrivee = itr3.valeur().nom;
+                    break;
+                }
+                ++itr3;
+            }
+
+            
+            
+            if( arrivee == "" && depart == "" ){
+                cout << "Impossible" << endl;
+                continue;
+            }
+            
+            cout << depart << " " << debut << " " << arrivee << " " << fin << endl;
+            
         }else{
             cout << "Commande '" << commande << "' invalide!" << endl;
             return 2;

@@ -69,7 +69,7 @@ Succursale::sortir( const Date& date ){
 
 bool
 Succursale::reserver( Succursale& origine, Succursale& destination,const Date& debut, const Date& fin){
-    cout << "origine:" << origine.nom << " destination:" << destination.nom << " debut: " << debut << " fin:" << fin << endl;
+    //cout << "origine:" << origine.nom << " destination:" << destination.nom << " debut: " << debut << " fin:" << fin << endl;
     bool resultat =  origine.accepteSortie( Date(debut)) && destination.accepteEntree(fin);
     if( resultat ){
         origine.sortir(debut);

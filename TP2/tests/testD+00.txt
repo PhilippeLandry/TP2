@@ -1,0 +1,15 @@
+creer	A	(45.509415,-73.568122)	4	1	;
+creer	C	(45.380947,-71.923853)	1	0	;
+creer	E	(48.420928,-71.053798)	1	5	;
+reserver	E	3j_16h30m	A	16j_16h30m	;
+reserver	E	12j_17h00m	E	28j_15h00m	;
+reserver	E	13j_20h30m	E	24j_15h00m	;
+reserver	C	4j_01h30m	C	5j_00h30m	;
+creer	B	(46.779344,-71.276443)	0	5	;
+reserver	A	13j_16h30m	E	15j_10h00m	;
+reserver	B	6j_11h30m	C	19j_10h00m	;
+reserver	E	13j_18h00m	E	31j_00h00m	;
+reserver	C	3j_00h30m	E	5j_21h30m	;
+creer	D	(46.347809,-72.578216)	5	5	;
+reserver	D	14j_04h00m	B	25j_02h00m	;
+reserver	E	2j_02h00m	A	20j_13h00m	;
