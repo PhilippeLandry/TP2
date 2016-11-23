@@ -100,7 +100,7 @@ int tp2(istream& entree){
 
             
             
-            if( arrivee == "" && depart == "" ){
+            if( arrivee == "" || depart == "" ){
                 cout << "Impossible" << endl;
                 continue;
             }
