@@ -1,14 +1,14 @@
 /*  INF3105 - Structures de données et algorithmes
     UQAM | Faculté des sciences | Département d'informatique
     Automne 2016 | TP2
-    Auteur(s): 
+    Auteur(s): PHILIPPE LANDRY LANP28096606
+ 
 */
 #if !defined(__SUCC_H__)
 #define __SUCC_H__
 #include <string>
 #include "date.h"
 #include "point.h"
-#include <map>
 #include "arbremap.h"
 using namespace std;
 

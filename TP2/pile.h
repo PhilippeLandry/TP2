@@ -2,6 +2,7 @@
  *  UQAM | Département d'informatique | Automne 2016
  *  Pile pour les intérateur d'Arbre AVL pour le Lab6 et TP2
  *  http://ericbeaudry.ca/INF3105/
+ *  AUTEUR(S): PHILIPPE LANDRY LANP28096606
  */
 #if !defined(__PILE__H__)
 #define __PILE__H__

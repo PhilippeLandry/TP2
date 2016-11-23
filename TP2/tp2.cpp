@@ -3,6 +3,7 @@
  UQAM | Faculté des sciences | Département d'informatique
  Automne 2016 | TP2
  http://ericbeaudry.ca/INF3105/tp2/
+ *  AUTEUR(S): PHILIPPE LANDRY LANP28096606
  */
 #include <fstream>
 #include <iostream>
@@ -11,19 +12,15 @@
 #include "succ.h"
 #include "point.h"
 
-#include <map>
+#include "arbremap.h"
 #include "date.h"
 
 using namespace std;
 
-
-
-
-
 int tp2(istream& entree){
     
     
-    std::map<string, Succursale> succursales;
+    ArbreMap<string, Succursale> succursales;
     
     int id=1;
     while(entree){
@@ -68,23 +65,23 @@ int tp2(istream& entree){
             
             
             // CLASSER LES SUCCURSALES PAR DISTANCE
-            map<double, Succursale> distancesOrigine;
-            map<double, Succursale> distancesDestination;
-            map<string, Succursale>::iterator itr = succursales.begin();
-            while( itr != succursales.end()){
-                double distanceOrigine = itr->second.position.distance(origine);
-                distancesOrigine[distanceOrigine] = itr->second;
-                double distanceDestination = itr->second.position.distance(destination);
-                distancesDestination[distanceDestination] = itr->second;
+            ArbreMap<double, Succursale> distancesOrigine;
+            ArbreMap<double, Succursale> distancesDestination;
+            ArbreMap<string, Succursale>::Iterateur itr = succursales.debut();
+            while( itr != succursales.fin()){
+                double distanceOrigine = itr.valeur().position.distance(origine);
+                distancesOrigine[distanceOrigine] = itr.valeur();
+                double distanceDestination = itr.valeur().position.distance(destination);
+                distancesDestination[distanceDestination] = itr.valeur();
                 ++itr;
             }
             
             // TROUVER UNE SUCCURSALE DE DÉPART
             string depart("");
-            map<double, Succursale>::iterator itr2 = distancesOrigine.begin();
-            while( itr2 != distancesOrigine.end() ){
-                if( itr2->second.accepteSortie(debut)){
-                    depart = itr2->second.nom;
+            ArbreMap<double, Succursale>::Iterateur itr2 = distancesOrigine.debut();
+            while( itr2 != distancesOrigine.fin() ){
+                if( itr2.valeur().accepteSortie(debut)){
+                    depart = itr2.valeur().nom;
                     break;
                 }
                 ++itr2;
@@ -92,10 +89,10 @@ int tp2(istream& entree){
 
             // TROUVER UNE SUCCURSALE D'ARRIVER
             string arrivee("");
-            map<double, Succursale>::iterator itr3 = distancesDestination.begin();
-            while( itr3 != distancesDestination.end() ){
-                if( itr3->second.accepteEntree(debut)){
-                    arrivee = itr3->second.nom;
+            ArbreMap<double, Succursale>::Iterateur itr3 = distancesDestination.debut();
+            while( itr3 != distancesDestination.fin() ){
+                if( itr3.valeur().accepteEntree(debut)){
+                    arrivee = itr3.valeur().nom;
                     break;
                 }
                 ++itr3;

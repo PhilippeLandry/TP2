@@ -2,6 +2,8 @@
     UQAM | Faculté des sciences | Département d'informatique
     Automne 2016 | TP2
     http://ericbeaudry.ca/INF3105/tp2/
+    Auteur(s): PHILIPPE LANDRY LANP28096606
+
 */
 #include "date.h"
 #include <sstream>

@@ -1,7 +1,7 @@
 /*  INF3105 - Structures de données et algorithmes
     UQAM | Faculté des sciences | Département d'informatique
     Automne 2016 | TP2
-    Auteur(s): 
+    Auteur(s): PHILIPPE LANDRY LANP28096606 
 */
 #include "succ.h"
 
@@ -19,10 +19,7 @@ Succursale::Succursale( string nom, Point position, int nbvoitures, int nbplaces
 bool
 Succursale::accepteSortie( const Date& date ,const Date& retour) {
     
-    if( nom == "I"){
-        trace();
-    }
-
+    
     ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
     int valeur = itr.valeur();
     if( valeur - 1 < 0 ){
@@ -41,7 +38,7 @@ Succursale::accepteSortie( const Date& date ,const Date& retour) {
 
 void
 Succursale::trace() {
-    return;
+    
     cout << "====================" << endl;
     cout << "Succ: " << nom << endl;
     ArbreMap<Date, int>::Iterateur itr = planning.debut();
@@ -51,9 +48,6 @@ Succursale::trace() {
 }
 bool
 Succursale::accepteEntree( const Date& date , const Date& retour)  {
-    if( nom == "I"){
-        trace();
-    }
 
     ArbreMap<Date, int>::Iterateur itr = planning.rechercherEgalOuPrecedent(date);
     int valeur = itr.valeur();
@@ -75,50 +69,32 @@ Succursale::accepteEntree( const Date& date , const Date& retour)  {
 void
 Succursale::entrer( const Date& date ){
     
-    if( nom == "I"){
-        trace();
-    }
     
     ArbreMap<Date, int>::Iterateur  itr = planning.rechercherEgalOuPrecedent(date);
+    int valeur = itr.valeur();
     
-    planning[date] = itr.valeur() + 1;
-    if( nom == "I"){
-        trace();
-    }
     itr = planning.debut();
      while (itr != planning.fin()) {
          
          if( itr.cle() <= date ){ ++itr; continue; }
-         if( nom == "I"){
-             trace();
-         }
          
          itr.valeur() = itr.valeur() + 1;
          ++itr;
          
      }
-    
-    if( nom == "I"){
-        trace();
-    }
+    planning[date] = valeur + 1;
     
     
 }
 
 void
 Succursale::sortir( const Date& date ){
-    if( nom == "I"){
-        trace();
-    }
 
     ArbreMap<Date, int>::Iterateur  itr = planning.rechercherEgalOuPrecedent(date);
     
     
     
-    
-    planning[date] = itr.valeur() - 1;
-
-    
+    int valeur = itr.valeur();
     itr = planning.debut();
     while (itr != planning.fin()) {
         if( itr.cle() <= date ){ ++itr; continue; }
@@ -126,9 +102,7 @@ Succursale::sortir( const Date& date ){
         itr.valeur() = itr.valeur() - 1;
         ++itr;
     }
-    if( nom == "I"){
-        trace();
-    }
+    planning[date] = valeur - 1;
 }
 
 

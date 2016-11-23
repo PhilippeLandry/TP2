@@ -2,6 +2,7 @@
  *  UQAM | Département d'informatique | Automne 2016
  *  Arbre AVL pour Lab6 + TP2
  *  http://ericbeaudry.ca/INF3105/
+ *  AUTEUR(S): PHILIPPE LANDRY LANP28096606
  */
 #if !defined(__ARBREAVL__H__)
 #define __ARBREAVL__H__
