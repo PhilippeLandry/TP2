@@ -38,7 +38,7 @@ Succursale::accepteSortie( const Date& date ,const Date& retour) {
 
 void
 Succursale::trace() {
-    
+    return;
     cout << "====================" << endl;
     cout << "Succ: " << nom << endl;
     ArbreMap<Date, int>::Iterateur itr = planning.debut();
