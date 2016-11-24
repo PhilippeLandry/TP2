@@ -24,54 +24,57 @@ int tp2(istream& entree){
     
     int id=1;
     while(entree){
+        
+        
         std::string commande;
         entree >> commande >> ws;
         if(!entree) break;
         cout << id << " : ";
         
+        
+        // CRÉER UNE NNOUVELLE SUCCURSALE
         if(commande=="creer"){
+            
             string nom;
             Point p;
             int nbVoitures=0, nbPlacesLibres=0;
             entree >> nom >> p >> nbVoitures >> nbPlacesLibres;
             succursales[nom]  = Succursale(nom, p, nbVoitures, nbPlacesLibres);
             cout << "Creee"  << endl;
-        }else if(commande=="reserver"){
+            
+        }
+        
+        // DEMANDER UNE RÉSERVATION
+        else if(commande=="reserver"){
             string origine, destination;
             Date debut, fin;
             entree >> origine >> debut >> destination >> fin;
             
-            if( id == 51 ){
-                succursales[origine].trace();
-                succursales[destination].trace();
-            }
             
             bool ok = Succursale::reserver(succursales[origine], succursales[destination], debut, fin);
             cout << (ok ? "Acceptee" : "NonDispo") << endl;
             
-            if( id == 51 ){
-                succursales[origine].trace();
-                succursales[destination].trace();
-            }
-
+            
 
         
-        }else if(commande=="suggerer"){
+        }
+        
+        // SUGGÉRER UNE RÉSERVATION
+        else if(commande=="suggerer"){
             Point origine, destination;
             Date debut, fin;
             entree >> origine >> debut >> destination >> fin;
             
             
             
-            
-            // CLASSER LES SUCCURSALES PAR DISTANCE
+            // CLASSER LES SUCCURSALES PAR DISTANCE DANS DEUX ARBRES
             ArbreMap<double, Succursale> distancesOrigine;
             ArbreMap<double, Succursale> distancesDestination;
             ArbreMap<string, Succursale>::Iterateur itr = succursales.debut();
             while( itr != succursales.fin()){
-                double distanceOrigine = itr.valeur().position.distance(origine);
+                double distanceOrigine = itr.valeur().getPosition().distance(origine);
                 distancesOrigine[distanceOrigine] = itr.valeur();
-                double distanceDestination = itr.valeur().position.distance(destination);
+                double distanceDestination = itr.valeur().getPosition().distance(destination);
                 distancesDestination[distanceDestination] = itr.valeur();
                 ++itr;
             }
@@ -81,18 +84,18 @@ int tp2(istream& entree){
             ArbreMap<double, Succursale>::Iterateur itr2 = distancesOrigine.debut();
             while( itr2 != distancesOrigine.fin() ){
                 if( itr2.valeur().accepteSortie(debut)){
-                    depart = itr2.valeur().nom;
+                    depart = itr2.valeur().getNom();
                     break;
                 }
                 ++itr2;
             }
 
-            // TROUVER UNE SUCCURSALE D'ARRIVER
+            // TROUVER UNE SUCCURSALE D'ARRIVÉE
             string arrivee("");
             ArbreMap<double, Succursale>::Iterateur itr3 = distancesDestination.debut();
             while( itr3 != distancesDestination.fin() ){
                 if( itr3.valeur().accepteEntree(debut)){
-                    arrivee = itr3.valeur().nom;
+                    arrivee = itr3.valeur().getNom();
                     break;
                 }
                 ++itr3;

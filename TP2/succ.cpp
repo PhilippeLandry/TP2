@@ -14,7 +14,26 @@ Succursale::Succursale( string nom, Point position, int nbvoitures, int nbplaces
     
     planning[ Date() ] = nbvoitures;
 }
+void
+Succursale::trace() {
+    
+    cout << "====================" << endl;
+    cout << "Succ: " << nom << endl;
+    ArbreMap<Date, int>::Iterateur itr = planning.debut();
+    for( ; itr != planning.fin(); ++itr){
+        cout << "   " << itr.cle() << " " << itr.valeur() <<  "/" << nbPlaces <<endl;
+    }
+}
 
+const string&
+Succursale::getNom() const {
+    return nom;
+}
+
+const Point&
+Succursale::getPosition() const {
+    return position;
+}
 
 bool
 Succursale::accepteSortie( const Date& date ,const Date& retour) {
@@ -36,16 +55,6 @@ Succursale::accepteSortie( const Date& date ,const Date& retour) {
     return true;
 }
 
-void
-Succursale::trace() {
-    return;
-    cout << "====================" << endl;
-    cout << "Succ: " << nom << endl;
-    ArbreMap<Date, int>::Iterateur itr = planning.debut();
-    for( ; itr != planning.fin(); ++itr){
-        cout << "   " << itr.cle() << " " << itr.valeur() <<  "/" << nbPlaces <<endl;
-    }
-}
 bool
 Succursale::accepteEntree( const Date& date , const Date& retour)  {
 
@@ -109,20 +118,23 @@ Succursale::sortir( const Date& date ){
 bool
 Succursale::reserver( Succursale& origine, Succursale& destination,const Date& debut, const Date& fin){
     
-  // cout << "origine:" << origine.nom << " destination:" << destination.nom << " debut: " << debut << " fin:" << fin << endl;
-
     
+    // CAS OÙ LA SUCCURSALE D'ORIGINE ET DE DESTINATION EST LA MËME
     bool memeSuccursale = origine.nom == destination.nom;
+    
+    // ON VALIDE LA SORTIE DU VÉHICULE
     bool resultat =  origine.accepteSortie( debut , memeSuccursale ? fin : Date());
-    if( resultat && origine.nom != destination.nom ){
+    
+    // ON VALIDE SON RETOUR SI SUCCURSALE DIFFÉRENTE
+    if( resultat && !memeSuccursale ){
             resultat &= destination.accepteEntree(fin);
     }
+    
+    // LES DEUX SUCCURSALES SONT VALIDÉES: ON PROCÈDE À LA RÉSERVATION
     if( resultat ){
         origine.sortir(debut);
         destination.entrer(fin);
     }
-    
 
-    
     return resultat;
 }

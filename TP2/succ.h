@@ -16,22 +16,34 @@ class Succursale{
   public:
     Succursale();
     Succursale( string nom, Point position, int nbvoitures, int nbplaceslibres);
-    string nom;
+    
+    // RÉSERVER UN VÉHICULE D'UNE SUCCURSALE À L'AUTRE SUR UN INTERVALLE DE TEMPS
     static bool reserver( Succursale& origine, Succursale& destination, const Date& debut, const Date& fin );
-    Point position;
+    
+
+    // ACCEPTE LA SORTIE D'UN VÉHICULE SUR UN INTERVALLE DE TEMPS OUVERT OU NON
     bool accepteSortie( const Date& date , const Date& retour = Date() );
+    
+    // ACCEPTE LE RETOUR D'UN VÉHICULE SUR UN INTERVALLE DE TEMPS OUVERT OU NON
     bool accepteEntree( const Date& date , const Date& retour = Date() );
     
-    void trace();
- 
+    
+    // ACCESSEURS
+    
+    const string& getNom() const;
+    const Point& getPosition() const;
+    
   private:
+    
     
     
     int nbPlaces; // nbvoitures + nbplaceslibres
     ArbreMap<Date, int> planning;
-    
     void entrer( const Date& date );
     void sortir( const Date& date );
+    string nom;
+    Point position;
+    void trace();
     
 
 };
